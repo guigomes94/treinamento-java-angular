@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Lista de itens</h1>
+<div>
+  <mat-table class="gray-background" [dataSource]="dataSource">
+    <mat-header-row *matHeaderRowDef="showColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: showColumns;"></mat-row>
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.item.id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.item.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef>Qtd.</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.quantity }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef>Preço</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.price | moneyFormat }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="subTotal">
+      <mat-header-cell *matHeaderCellDef>SubTotal</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.subTotal | moneyFormat }}</mat-cell>
+    </ng-container>
+  </mat-table>
+</div>
+
+<h3 mat-dialog-title>Selecione abaixo se deseja adicionar mais itens:</h3>
+<form class="form" [formGroup]="form">
+  <mat-toolbar-row>
+    <mat-form-field class="select">
+      <mat-label>Item</mat-label>
+      <mat-select formControlName="item" name="item">
+        <mat-option *ngFor="let i of items" [value]="i">
+          {{ i.name }} - R$ {{ i.price | moneyFormat }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="field-width">
+      <mat-label>Quantidade</mat-label>
+      <input matInput formControlName="quantity" name="quantity">
+    </mat-form-field>
+    <button (click)="adicionarItensPedido()" class="gray-background btn" mat-mini-fab color="primary" ><mat-icon>add</mat-icon></button>
+  </mat-toolbar-row>
+</form>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Fechar</button>
+</div>

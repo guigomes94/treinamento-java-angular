@@ -35,9 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		User u0 = new User(null, "admin", "admin");
-		User u1 = new User(null, "maria", "123456");
-		User u2 = new User(null, "alex", "123456");
+		User u0 = new User(null, "admin", "admin", true);
+		User u1 = new User(null, "maria", "123456", false);
+		User u2 = new User(null, "alex", "123456", false);
 		
 		users.saveAll(Arrays.asList(u0, u1, u2));
 		
@@ -46,10 +46,11 @@ public class TestConfig implements CommandLineRunner{
 		
 		orders.saveAll(Arrays.asList(o1, o2));
 		
-		Item i1 = new Item(null, "frango assado", 10.0);
-		Item i2 = new Item(null, "coca zero", 3.5);
+		Item i1 = new Item(null, "Frango Assado", 10.0);
+		Item i2 = new Item(null, "Coca Zero 350ml", 3.5);
+		Item i3 = new Item(null, "Porção Batata Frita 500g", 6.0);
 
-		items.saveAll(Arrays.asList(i1, i2));
+		items.saveAll(Arrays.asList(i1, i2, i3));
 		
 		OrderItem oi1 = new OrderItem(o1, i1, 2, i1.getPrice());
 		OrderItem oi2 = new OrderItem(o1, i2, 3, i2.getPrice());

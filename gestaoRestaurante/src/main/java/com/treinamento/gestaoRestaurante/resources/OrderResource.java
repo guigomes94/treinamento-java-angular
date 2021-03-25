@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.treinamento.gestaoRestaurante.entities.Order;
+import com.treinamento.gestaoRestaurante.entities.OrderItemDTO;
 import com.treinamento.gestaoRestaurante.services.OrderService;
 
 @RestController
@@ -48,6 +49,13 @@ public class OrderResource {
 				.buildAndExpand(saved.getId())
 				.toUri();
 		return ResponseEntity.created(uri).body(saved);
+	}
+	
+	@PostMapping("/{id}/items")
+	public ResponseEntity<?> insertItems(@PathVariable Long id, @RequestBody OrderItemDTO item) {
+		service.insertItem(item, id);
+		Order response = service.findById(id);
+		return response != null ? ResponseEntity.status(HttpStatus.CREATED).body(response) : ResponseEntity.badRequest().build();
 	}
 	
 	@PutMapping("/{id}")

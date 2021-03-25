@@ -1,1 +1,51 @@
-<p>list-orders works!</p>
+<button (click)="add()" class="gray-background" mat-raised-button ><mat-icon>add</mat-icon></button>
+
+<div>
+  <mat-form-field fxLayoutAlign="center">
+    <mat-label>Filtrar: </mat-label>
+    <input matInput placeholder="Filtre por qualquer campo" (keyup)="filter(inputFiltro.value)" #inputFiltro>
+  </mat-form-field>
+
+  <mat-table class="gray-background" [dataSource]="dataSource">
+    <mat-header-row *matHeaderRowDef="showColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: showColumns;"></mat-row>
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Mesa</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.tableNumber }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let item">{{ item.status }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
+      <mat-cell *matCellDef="let item">
+        <button mat-icon-button (click)="detalhar(item)" matTooltip="Detalhar">
+          <mat-icon>list_alt</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="cancelar(item)" matTooltip="Cancelar">
+          <mat-icon>cancel</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="fecharPedido(item)" matTooltip="Fechar pedido">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="fecharConta(item)" matTooltip="Fechar conta">
+          <mat-icon>payment</mat-icon>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+  </mat-table>
+</div>

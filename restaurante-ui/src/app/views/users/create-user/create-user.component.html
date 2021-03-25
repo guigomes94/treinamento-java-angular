@@ -1,1 +1,32 @@
-<p>create-user works!</p>
+<div *ngIf="!form.value.id; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock><h1 mat-dialog-title>Novo</h1></ng-template>
+<ng-template #elseBlock><h1 mat-dialog-title>Editar</h1></ng-template>
+
+<div mat-dialog-content>
+  <form fxLayout="column" class="form" [formGroup]="form">
+
+    <mat-form-field class="field-width">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" name="name">
+    </mat-form-field>
+
+    <mat-form-field class="field-width">
+      <mat-label>Senha</mat-label>
+      <input matInput formControlName="password" name="password">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Admin</mat-label>
+      <mat-select formControlName="admin" name="admin">
+        <mat-option value="true"> Sim </mat-option>
+        <mat-option value="false"> Não </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="createOrUpdate()">Salvar</button>
+</div>

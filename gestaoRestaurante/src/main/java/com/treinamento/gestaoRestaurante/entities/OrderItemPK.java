@@ -65,4 +65,11 @@ public class OrderItemPK implements Serializable{
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "OrderItemPK [order=" + order.getId() + ", item=" + item.getId() + "]";
+	}
+	
+	
+
 }
