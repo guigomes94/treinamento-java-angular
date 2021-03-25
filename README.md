@@ -1,5 +1,5 @@
-# treinamento-java-angular
-Desafio Treinamento Java/Angular 2021: Desenvolver um sistema de Gestão de Restaurante
+# Treinamento Java/Angular
+Desafio - Desenvolver um sistema de Gestão de Restaurante
 
 ## Get Started
 
